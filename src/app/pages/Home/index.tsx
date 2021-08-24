@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { CarCard } from '../../components/CarCard';
 import { Header } from '../../components/Header'
+import Loader from '../../components/Loader';
 import { Showcase } from '../../components/Showcase'
 import api from '../../services/api';
 
 import { 
+  Centered, 
   Container,
   CarList,
   CarListItem,
@@ -28,6 +30,7 @@ interface ICar {
 export function Home() {
   const [cars, setCars] = useState<ICar[]>([])
   const [showcase, setShowcase] = useState<ICar[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchShowcase(): Promise<void> {
@@ -39,8 +42,22 @@ export function Home() {
       setShowcase(showcase);
     }
 
-    fetchShowcase();
+    try {
+      fetchShowcase();
+    } catch(err) {
+      alert("Falha no carregamento. Tente novamente.")
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  if (loading) {
+    return (
+      <Centered>
+        <Loader color="#000" />
+      </Centered>
+    )
+  } 
 
   return (
     <Container>
