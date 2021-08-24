@@ -13,7 +13,10 @@ export const Container = styled.button`
   font-size: 1.2rem;
   margin-top: 16px;
   transition: background-color 0.2s;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
   &:hover {
     background-color: ${shade(0.7, "#FFF")};
   }

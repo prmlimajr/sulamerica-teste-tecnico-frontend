@@ -48,3 +48,12 @@ export const FormContainer = styled.div`
 
 export const FormTitle = styled.h2`
 `
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+export const ValidationError = styled.span`
+  font-weight: 700;
+  color: var(--color-highlight)
+` 
