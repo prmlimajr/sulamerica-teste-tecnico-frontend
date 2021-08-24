@@ -32,22 +32,28 @@ export function Home() {
   const [showcase, setShowcase] = useState<ICar[]>([]);
   const [loading, setLoading] = useState(true);
 
+  async function fetchShowcase(): Promise<ICar[]> {
+    const response = await api.get("/cars");    
+    
+    return response.data
+  }
+
   useEffect(() => {
-    async function fetchShowcase(): Promise<void> {
-      const response = await api.get("/cars");
+    let isCanceled = false;
 
-      setCars(response.data);
-      
-      const showcase = response.data.filter((car: ICar) => car.isShowcase);
-      setShowcase(showcase);
-    }
-
-    try {
-      fetchShowcase();
-    } catch(err) {
+    fetchShowcase().then(response => {
+      if (!isCanceled) {
+        setCars(response);
+  
+        const showcase = response.filter((car: ICar) => car.isShowcase);
+        setShowcase(showcase);
+      }
+    }).catch((error) => {
       alert("Falha no carregamento. Tente novamente.")
-    } finally {
-      setLoading(false);
+    }).finally(() => setLoading(false));
+
+    return () => {
+      isCanceled = true;
     }
   }, []);
 
@@ -61,7 +67,6 @@ export function Home() {
 
   return (
     <Container>
-      <Header />
       <Showcase data={showcase}/>
       
       <CarList>

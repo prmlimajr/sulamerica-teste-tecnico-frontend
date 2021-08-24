@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import * as Yup from 'yup';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { FaUserAlt } from 'react-icons/fa'
@@ -20,6 +20,7 @@ import {
   Column,
   ValidationError
 } from './styles';
+import { useAuth } from '../../hooks/auth';
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -36,20 +37,19 @@ interface IForm {
 export function SignIn() {
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async ({ name, email }: IForm) => {
+  const { signIn } = useAuth();
+  
+  const handleSubmit = useCallback(async ({ name, email }: IForm) => {
     try {
       setLoading(true);
 
-      console.log({name, email});
-      // await signIn({ name, email });
-
-      // history.push('/');
+      await signIn({ name, email });
     } catch (err) {
       alert("Falha na requisição!")
     } finally {
       setLoading(false);
     }
-  };
+  }, [signIn]);
 
   return (
     <Container>

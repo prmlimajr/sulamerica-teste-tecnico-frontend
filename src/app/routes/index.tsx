@@ -1,51 +1,17 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { PrivateRoute } from './PrivateRoute';
+import { Switch } from 'react-router-dom';
+import Route from './Route';
 
 import { Home } from '../pages/Home';
 import { SignIn } from '../pages/SignIn';
-
-
+import { CarDetail } from '../pages/CarDetail';
 
 export default function Routes() {
-  const routes = [
-    {
-      path: '/',
-      component: Home,
-      isExact: true,
-      isPrivate: true,
-    },
-    // {
-    //   path: '/car/:id',
-    //   component: CarDetail,
-    //   isExact: true,
-    //   isPrivate: true,
-    // },
-    {
-      path: '/signin',
-      component: SignIn,
-    }
-  ];
-
-  return (
-    <BrowserRouter>
-      <Switch>
-        {routes.map(route => {
-          return route.isPrivate ? (
-            <PrivateRoute
-              exact={route.isExact}
-              path={route.path}
-              component={route.component}
-            />
-          ) : (
-            <Route
-              exact={route.isExact}
-              path={route.path}
-              component={route.component}
-            />
-          );
-        })}
-      </Switch>
-    </BrowserRouter>
+ return (
+    <Switch>
+      <Route path="/" exact component={SignIn} />       
+      <Route path="/home" component={Home} isPrivate />
+      <Route path="/car/:id" component={CarDetail} isPrivate />
+    </Switch>
   );
 }

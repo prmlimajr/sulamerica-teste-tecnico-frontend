@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ImageGallery from 'react-image-gallery';
+import { useHistory } from 'react-router-dom';
 import { Button } from '../Button';
 
 import { 
@@ -29,9 +30,12 @@ interface DataProps {
 }
 
 export function Showcase({ data }: DataProps) {
+  const [id, setId] = useState('');
   const [brand, setBrand] = useState('');
   const [name, setName] = useState('');
   const [dailyRate, setDailyRate] = useState(0);
+
+  const history = useHistory();
 
   const images = data.map(car => {
     return {
@@ -41,20 +45,24 @@ export function Showcase({ data }: DataProps) {
   })
 
   function onSlide(index: number) {
+    let id = data[index].id;
     let brand = data[index].brand;
     let name = data[index].name;
     let dailyRate = data[index].dailyRate;
 
+    setId(id);
     setBrand(brand);
     setName(name);
     setDailyRate(dailyRate);
   }
 
   function onImageLoad() {
+    let id = data[0].id;
     let brand = data[0].brand;
     let name = data[0].name;
     let dailyRate = data[0].dailyRate;
 
+    setId(id);
     setBrand(brand);
     setName(name);
     setDailyRate(dailyRate);
@@ -86,7 +94,7 @@ export function Showcase({ data }: DataProps) {
           </CarInfoText>
         </CarInfo>
           
-        <Button>RESERVAR</Button>
+        <Button onClick={() => history.push(`car/${id}`)}>RESERVAR</Button>
       </HighlightedCarContainer>
     </Container>
   )

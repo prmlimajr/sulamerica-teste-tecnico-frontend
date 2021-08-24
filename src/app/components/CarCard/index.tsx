@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom';
 import { Button } from '../Button';
 
 import {
@@ -28,6 +29,8 @@ interface DataProps {
 }
 
 export function CarCard({ data }: DataProps) {
+  const history = useHistory();
+
   return (
     <Container>
       <CarImage src={data.photo} alt={`${data.brand} ${data.name}`} />
@@ -41,7 +44,7 @@ export function CarCard({ data }: DataProps) {
             }).format(data.dailyRate)}/dia</CarDescription>        
       </CarInfo>
 
-      <Button>Reservar</Button>
+      <Button onClick={() => history.push(`/car/${data.id}`)}>Reservar</Button>
     </Container>
   )
 }
