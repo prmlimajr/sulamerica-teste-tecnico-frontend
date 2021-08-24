@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items: center;
   height: 60px;
   width: 100%;
-  padding: 20px 100px;
+  padding: 20px 0;
 `
 
 export const Brand = styled.h1`

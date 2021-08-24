@@ -31,6 +31,23 @@ export const GlobalStyle = createGlobalStyle`
     background: var(--color-background);
     -webkit-font-smoothing: antialiased;
     color: var(--color-primary);
+    padding: 0 100px;
+
+    @media(max-width:1080px) {
+      padding: 0 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @media(max-width:720px) {
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   body, input, button {
