@@ -21,6 +21,7 @@ import {
   ValidationError
 } from './styles';
 import { useAuth } from '../../hooks/auth';
+import { useHistory } from 'react-router-dom';
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -36,6 +37,7 @@ interface IForm {
 
 export function SignIn() {
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   const { signIn } = useAuth();
   

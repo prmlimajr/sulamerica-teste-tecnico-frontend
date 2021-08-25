@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 
 import { Button } from '../../Button';
-import { DatePicker } from '../../DatePicker'
+import { DatePicker } from '../../DatePicker';
 
 import {
   DimArea,
@@ -10,7 +10,6 @@ import {
   CloseArea,
   ModalTitle,
 } from './styles';
-
 
 interface Car {
   id: string;
@@ -46,41 +45,37 @@ export function DatePickerModal({
   car,
 }: DatePickerModalProps) {
   const [range, setRange] = useState<Range>({} as Range);
-  const [unavailableDates, setUnavailableDates] = useState<Date[]>([])
-  const [blocked, setBlocked] = useState(false)
+  const [unavailableDates, setUnavailableDates] = useState<Date[]>([]);
+  const [blocked, setBlocked] = useState(false);
 
   const handleUnavailableDates = () => {
     const dates: Date[] = [];
 
-    car.unavailableDates.forEach(date => {
+    car.unavailableDates.forEach((date) => {
       dates.push(new Date(date));
-    })
+    });
 
-    setUnavailableDates(dates)
+    setUnavailableDates(dates);
 
-    console.log({range})
-    if(range.from && range.to) {
-      console.log(("AAAAAAAAAAAAA"))
-      let currentDate = new Date(range.from.getTime());
+    if (range.from && range.to) {
+      const currentDate = new Date(range.from.getTime());
       const between: Date[] = [];
-  
+
       while (currentDate <= range.to) {
         between.push(new Date(currentDate));
         currentDate.setDate(currentDate.getDate() + 1);
       }
-  
-      console.log(car.unavailableDates, { between})
-      
-      const forbiddenRange = between.some((date) => car.unavailableDates.includes(date.toISOString().split('T')[0]))
-  
+
+      const forbiddenRange = between.some((date) => car.unavailableDates.includes(date.toISOString().split('T')[0]));
+
       if (forbiddenRange) {
-        setBlocked(true)
+        setBlocked(true);
       }
     }
-  }
+  };
 
   useEffect(() => {
-    handleUnavailableDates()
+    handleUnavailableDates();
   }, []);
 
   function handleChooseDates() {
@@ -88,7 +83,6 @@ export function DatePickerModal({
     onChooseRange(range);
   }
 
-  console.log({blocked})
   return (
     <DimArea>
       <Container>
@@ -96,10 +90,10 @@ export function DatePickerModal({
           <IoMdClose size={24} color="#000" onClick={onClose} />
         </CloseArea>
         <ModalTitle>Escolha os dias da reserva:</ModalTitle>
-        <DatePicker onSetRange={setRange} unavailableDates={unavailableDates}/>
+        <DatePicker onSetRange={setRange} unavailableDates={unavailableDates} />
 
-        <Button onClick={() => handleChooseDates() } disabled={blocked}>Escolher</Button>
+        <Button onClick={() => handleChooseDates()} disabled={blocked}>Escolher</Button>
       </Container>
     </DimArea>
-  )
+  );
 }

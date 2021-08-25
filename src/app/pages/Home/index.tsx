@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
+
 import { CarCard } from '../../components/CarCard';
-import { Header } from '../../components/Header'
 import Loader from '../../components/Loader';
 import { Showcase } from '../../components/Showcase'
+
 import api from '../../services/api';
 
 import { 

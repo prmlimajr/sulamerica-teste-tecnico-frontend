@@ -33,10 +33,11 @@ export const AuthProvider: React.FC = ({ children }) => {
   const signIn = async ({ name, email }: User) => {
     const { data } = await api.post("/user/signin", { name, email });
 
+    setData(data);
     const { user, token } = data;
     
     loggedIn(token, user);
-
+    
     history.push('/home');
   }
 

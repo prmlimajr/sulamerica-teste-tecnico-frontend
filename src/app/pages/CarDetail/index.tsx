@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { IoIosArrowBack } from 'react-icons/io';
 import { useHistory } from 'react-router-dom';
+
 import { Button } from '../../components/Button';
-import { DatePicker } from '../../components/DatePicker';
 import Loader from '../../components/Loader';
 import { DatePickerModal } from '../../components/Modals/DatePickerModal';
 import api from '../../services/api';
@@ -113,6 +113,7 @@ export function CarDetail() {
       await api.post(`cars/book/${carId}`, { dates });
 
       alert("Reserva realizada com sucesso!");
+      history.push("/home");
     } catch (err) {
       alert("Falha na reserva: " + err.message);
     } finally {
@@ -159,6 +160,7 @@ export function CarDetail() {
             <CarInfo>Modelo: {car.model}</CarInfo>
             <CarInfo>Ano de fabricação: {car.manufactureYear}</CarInfo>
             <CarInfo>Cor: {car.color}</CarInfo>
+            <CarInfo>Quilometragem: {car.mileage} Km</CarInfo>
             
             <CarReservationArea>
               <ReservationDates>
