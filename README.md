@@ -1,46 +1,75 @@
-# Getting Started with Create React App
+# APP de reserva de veículos
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 💻 Sobre o projeto
+Esta aplicação foi desenvolvida como parte do teste técnico solicitado pela SulAmérica. Trata-se de um sistema de reservas de veículos.
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🛠 Ferramentas utilizadas
+  <ul>
+    <li>
+      <a href='https://www.typescriptlang.org/'>Typescript</a>
+    </li>
+    <li>
+      <a href='https://pt-br.reactjs.org/'>React</a>
+    </li>
+    <li>
+      <a href='https://reactrouter.com/'>React Router DOM</a>
+    </li>
+    <li>
+      <a href='https://styled-components.com/'>Styled Components</a>
+    </li>
+    <li>
+      <a href='https://formik.org/docs/overview'>Formik</a>
+    </li>
+    <li>
+      <a href='https://react-icons.github.io/react-icons/'>React Icons</a>
+    </li>
+    <li>
+      <a href='https://github.com/xiaolin/react-image-gallery'>React Image Gallery</a>
+    </li>
+    <li>
+      <a href='https://react-day-picker.js.org/'>React Day Picker</a>
+    </li>
+    <li>
+      <a href='https://github.com/prmlimajr/sulamerica-teste-tecnico-backend'>API de reserva de veículos</a>
+    </li>
+  </ul>
+  
+  ## 🚀 Executando o projeto
+  Para executar esta aplicação localmente é necessário que você tenha em sua máquina o Node, os gerenciadores de pacote NPM e/ou Yarn e a aplicação backend instalada e rodando. Também será necessário a ferramenta de versionamento de códigos Git. 
+  
+  <p>Você pode acessar o repositório com o código do backend e instruções para fazê-lo funcionar em: <a href='https://github.com/prmlimajr/sulamerica-teste-tecnico-backend'>https://github.com/prmlimajr/sulamerica-teste-tecnico-backend</a></p>
+  
+  Com estas ferramentas instaladas você deve, no terminal, acessar a pasta de destino escolhida para este projeto e clonar este repositório para a sua máquina usando o comando abaixo:
+  
+  ```bash
+    git clone https://github.com/prmlimajr/sulamerica-teste-tecnico-frontend.git
+  ```
+  
+  <p>Após terminar o processo de download do projeto, você deve acessar a pasta com o conteúdo baixado e executar o comando abaixo para instalar as dependências:</p>
+  
+  ```
+    npm install
+  ```
+  
+  ou se preferir:
+  
+  ```
+    yarn
+  ```
+  
+  Após a instalação de todos os pacotes, é possível rodar o projeto localmente através do comando:
+  
+  ```
+    npm run dev
+  ```
+  ou
+  ```
+    yarn dev
+  ```
+  
+  Uma mensagem será exibida no console indicando que o servidor está sendo executado, na porta 3000.
+  
+  <p>Com o servidor em execução você pode acessar <a href='http://localhost:3000'>http://localhost:3000</a> para acessar a aplicação.</p>
+    
+ ## 😯 Autor
+<a href="https://www.linkedin.com/in/prmlimajr/">Paulo Lima</a>
