@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import { useHistory } from 'react-router-dom';
 
@@ -20,8 +20,8 @@ import {
   CarReservationArea,
   ReservationDates,
   TotalContainer,
-  Centered
-} from './styles'
+  Centered,
+} from './styles';
 
 interface ICar {
   id: string;
@@ -49,7 +49,7 @@ export function CarDetail() {
   const [isDatePickerModalOpen, setIsDatePickerModalOpen] = useState(false);
   const [range, setRange] = useState<Range>({} as Range);
   const [dates, setDates] = useState<Date[]>([]);
-  
+
   const history = useHistory();
 
   useEffect(() => {
@@ -57,14 +57,14 @@ export function CarDetail() {
       const id = history.location.pathname.split('/')[2];
       const response = await api.get(`/cars/${id}`);
 
-      const [car] = response.data
+      const [car] = response.data;
       setCar(car);
     }
 
     try {
       fetchCar();
     } catch (error) {
-      alert("Falha no carregamento. Tente novamente.");
+      alert('Falha no carregamento. Tente novamente.');
     } finally {
       setLoading(false);
     }
@@ -87,7 +87,7 @@ export function CarDetail() {
   }
 
   function handleChosenDates(range: any) {
-    setRange(range)
+    setRange(range);
 
     let currentDate = new Date(range.from.getTime());
     const between = [];
@@ -104,7 +104,7 @@ export function CarDetail() {
     const carId = history.location.pathname.split('/')[2];
 
     if (dates.length === 0) {
-      alert("Selecione pelo menos uma data.");
+      alert('Selecione pelo menos uma data.');
       return;
     }
 
@@ -112,83 +112,86 @@ export function CarDetail() {
       setLoading(true);
       await api.post(`cars/book/${carId}`, { dates });
 
-      alert("Reserva realizada com sucesso!");
-      history.push("/home");
+      alert('Reserva realizada com sucesso!');
+      history.push('/home');
     } catch (err) {
-      alert("Falha na reserva: " + err.message);
+      alert('Falha na reserva: ' + err.message);
     } finally {
       setLoading(false);
     }
   }
 
-  return loading ? 
+  return loading ? (
     renderLoader()
-    : (
-      <>
-        {isDatePickerModalOpen && 
-          <DatePickerModal 
-            isOpen={isDatePickerModalOpen}
-            onClose={handleCloseModal}
-            onChooseRange={(range) => handleChosenDates(range)}
-            car={car}
-          />
-        }
+  ) : (
+    <>
+      {isDatePickerModalOpen && (
+        <DatePickerModal
+          isOpen={isDatePickerModalOpen}
+          onClose={handleCloseModal}
+          onChooseRange={(range) => handleChosenDates(range)}
+          car={car}
+        />
+      )}
 
-        <Container>
-          <CarImageContainer>
-            <CarImage src={car.photo} alt={`${car.brand} ${car.name}`}/>
-          </CarImageContainer>
+      <Container>
+        <CarImageContainer>
+          <CarImage src={car.photo} alt={`${car.brand} ${car.name}`} />
+        </CarImageContainer>
 
-          <CarInfoContainer>
-            <CarInfoHeader onClick={() => history.goBack()}>
-              <IoIosArrowBack size={14} color="#000" />
-              <GoBack>Voltar</GoBack>
-            </CarInfoHeader>
+        <CarInfoContainer>
+          <CarInfoHeader onClick={() => history.goBack()}>
+            <IoIosArrowBack size={14} color="#000" />
+            <GoBack>Voltar</GoBack>
+          </CarInfoHeader>
 
-            <CarName>{car.name}</CarName>
-            <CarInfo>Fabricante: {car.brand}</CarInfo>
-            <CarInfo>Modelo: {car.model}</CarInfo>
+          <CarName>{car.name}</CarName>
+          <CarInfo>Fabricante: {car.brand}</CarInfo>
+          <CarInfo>Modelo: {car.model}</CarInfo>
 
-            <CarRate>
-              {new Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              }).format(car.dailyRate)}/dia
-            </CarRate>
+          <CarRate>
+            {new Intl.NumberFormat('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            }).format(car.dailyRate)}
+            /dia
+          </CarRate>
 
-            <CarInfo>Fabricante: {car.brand}</CarInfo>
-            <CarInfo>Modelo: {car.model}</CarInfo>
-            <CarInfo>Ano de fabricação: {car.manufactureYear}</CarInfo>
-            <CarInfo>Cor: {car.color}</CarInfo>
-            <CarInfo>Quilometragem: {car.mileage} Km</CarInfo>
-            
-            <CarReservationArea>
-              <ReservationDates>
-                <CarInfo>
-                  Do dia: {range.from && range.from.toLocaleDateString()}
-                </CarInfo>
+          <CarInfo>Fabricante: {car.brand}</CarInfo>
+          <CarInfo>Modelo: {car.model}</CarInfo>
+          <CarInfo>Ano de fabricação: {car.manufactureYear}</CarInfo>
+          <CarInfo>Cor: {car.color}</CarInfo>
+          <CarInfo>Quilometragem: {car.mileage} Km</CarInfo>
 
-                <CarInfo>
-                  até o dia: {range.to && range.to.toLocaleDateString()}
-                </CarInfo>
+          <CarReservationArea>
+            <ReservationDates>
+              <CarInfo>
+                Do dia: {range.from && range.from.toLocaleDateString()}
+              </CarInfo>
 
-                <Button onClick={handleOpenModal}>Escolher dias</Button>
-              </ReservationDates>
+              <CarInfo>
+                até o dia: {range.to && range.to.toLocaleDateString()}
+              </CarInfo>
 
-              <TotalContainer>
-                <CarInfo>Valor Total:</CarInfo>
-                <CarRate>
-                  {new Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  }).format(car.dailyRate * dates.length)}
-                </CarRate>
-              </TotalContainer>
-            </CarReservationArea>
+              <Button onClick={handleOpenModal}>Escolher dias</Button>
+            </ReservationDates>
 
-            <Button type="submit" onClick={handleSubmit}>RESERVAR</Button>
-          </CarInfoContainer>
-        </Container>
+            <TotalContainer>
+              <CarInfo>Valor Total:</CarInfo>
+              <CarRate>
+                {new Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                }).format(car.dailyRate * dates.length)}
+              </CarRate>
+            </TotalContainer>
+          </CarReservationArea>
+
+          <Button type="submit" onClick={handleSubmit}>
+            RESERVAR
+          </Button>
+        </CarInfoContainer>
+      </Container>
     </>
   );
 }

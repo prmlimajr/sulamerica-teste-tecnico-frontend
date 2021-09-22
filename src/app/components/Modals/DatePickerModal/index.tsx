@@ -4,12 +4,7 @@ import { IoMdClose } from 'react-icons/io';
 import { Button } from '../../Button';
 import { DatePicker } from '../../DatePicker';
 
-import {
-  DimArea,
-  Container,
-  CloseArea,
-  ModalTitle,
-} from './styles';
+import { DimArea, Container, CloseArea, ModalTitle } from './styles';
 
 interface Car {
   id: string;
@@ -66,7 +61,9 @@ export function DatePickerModal({
         currentDate.setDate(currentDate.getDate() + 1);
       }
 
-      const forbiddenRange = between.some((date) => car.unavailableDates.includes(date.toISOString().split('T')[0]));
+      const forbiddenRange = between.some((date) =>
+        car.unavailableDates.includes(date.toISOString().split('T')[0]),
+      );
 
       if (forbiddenRange) {
         setBlocked(true);
@@ -92,7 +89,9 @@ export function DatePickerModal({
         <ModalTitle>Escolha os dias da reserva:</ModalTitle>
         <DatePicker onSetRange={setRange} unavailableDates={unavailableDates} />
 
-        <Button onClick={() => handleChooseDates()} disabled={blocked}>Escolher</Button>
+        <Button onClick={() => handleChooseDates()} disabled={blocked}>
+          Escolher
+        </Button>
       </Container>
     </DimArea>
   );
